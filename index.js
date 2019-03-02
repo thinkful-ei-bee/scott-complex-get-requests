@@ -1,9 +1,13 @@
 'use strict';
 /* global $ */
 
-const apiKey = 'Toxpz6W0wVrV7c9dwb0cOWvl3kmVZLztz1RYMcwM'; 
-const searchURL = 'https://api.nps.gov/api/v1/parks';
-let stateCodeString = '';
+const store = {
+  apiKey: 'Toxpz6W0wVrV7c9dwb0cOWvl3kmVZLztz1RYMcwM',
+  searchURL: 'https://api.nps.gov/api/v1/parks',
+  stateCodeString: '',
+  states: '',
+  limit: 0,
+};
 
 
 function formatQueryParams(params) {
@@ -32,19 +36,19 @@ function displayResults(responseJson) {
 }
 
 function makeStateCodeString(states) {
-  stateCodeString = '';
+  store.stateCodeString = '';
   states.forEach(element => {
-    stateCodeString += `stateCode=${element}&`;
+    store.stateCodeString += `stateCode=${element}&`;
   });
 }
 
 function getNationalParks(limit) {
   const params = {
     limit,
-    api_key: apiKey,
+    api_key: store.apiKey,
   };
   const queryString = formatQueryParams(params);
-  const url = searchURL + '?' + stateCodeString + queryString;
+  const url = store.searchURL + '?' + store.stateCodeString + queryString;
 
   fetch(url)
     .then(response => {
@@ -62,10 +66,10 @@ function getNationalParks(limit) {
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
-    const states = $('#states').val().split(',');
-    makeStateCodeString(states);
-    const limit = $('#max-results').val();
-    getNationalParks(limit);
+    store.states = $('#states').val().split(',');
+    makeStateCodeString(store.states);
+    store.limit = $('#max-results').val();
+    getNationalParks(store.limit);
   });
 }
 

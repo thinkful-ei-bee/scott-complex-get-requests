@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>National Parks Service</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="container">
+    <form action="" method="get" class="parks-form">
+      <div>
+        <label for="states">Enter states separated by commas: </label>
+        <input type="text" name="states" id="states" required>
+      </div>
+      <div>
+        <label for="max-results">Enter max results: </label>
+        <input type="text" name="max-results" id="max-results" value="10" required>
+      </div>
+      <div>
+        <input type="submit" value="Submit!">
+      </div>
+    </form>
+
+    <p id="js-error-message" class="error-message"></p>
+        <section id="results" class="hidden">
+          <h2>Search results</h2>
+          <ul id="results-list">
+          </ul>
+        </section>
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
